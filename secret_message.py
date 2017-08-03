@@ -4,11 +4,10 @@ import re
 from random import *
 import time
 
-# directory of the alphabet images
-root_dir = os.getcwd() + '/alphabet/'
 
 # Returns a list of our images which represents every single character on the alphabet (A-Z) and a dot ('.') & a whitespace (' ')
-def get_list():
+# root_dir is the directory of the alphabet images
+def get_list(root_dir=os.getcwd() + '/alphabet/'):
     # get list of files of the given directory
     list_of_filenames = os.listdir(root_dir)
     # sort list lexicographically
@@ -29,7 +28,7 @@ def get_list():
 def get_input():
     # read single line from console / user input
     print("Please enter your secret message to encrypt")
-    user_input = raw_input("max. 28 characters (allowed characters are A-Z, space, .): ").upper()
+    user_input = raw_input("max. 28 characters (allowed characters are A-Z, whitespace, .): ").upper()
 
     # replace all whitespace characters to a single whitespace character
     regex = re.compile('[\s]+')
@@ -43,7 +42,7 @@ def get_input():
 
 
 # creates the new secret message from the images by
-def create_new_images(secret_message, output_folder='output'):
+def create_new_images(secret_message, root_dir=os.getcwd() + '/alphabet/', output_folder='output'):
     # directory of the alphabet images
     list = get_list()
     # directory to put the secret message into
@@ -94,9 +93,9 @@ def create_secret_message(output_folder='output'):
 
 ### START DECRYPTING MESSAGE ###
 
-def decrypt_secret_message(folder='output'):
+def decrypt_secret_message(root_dir=os.getcwd() + '/alphabet/', folder='output'):
     # directory of the images
-    dir_images = os.getcwd() + '/alphabet/' + folder + '/'
+    dir_images = root_dir + folder + '/'
     # get list of files of the given directory
     list_of_files = os.listdir(dir_images)
 
