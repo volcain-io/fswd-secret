@@ -26,23 +26,25 @@ def get_list(root_dir=os.getcwd() + '/alphabet/'):
 # Ask the user which secret message to encrypt
 # returns the first 28 characters of the user input in uppercase representation
 def get_input():
-    # read single line from console / user input
     print("Please enter your secret message to encrypt")
-    user_input = raw_input("max. 28 characters (allowed characters are A-Z, whitespace, .): ").upper()
+    while( True ):
+        # read single line from console / user input
+        user_input = raw_input("max. 28 characters (allowed characters are A-Z, whitespace, .): ")
 
-    if ( user_input ):
-        # replace all whitespace characters to a single whitespace character
-        regex = re.compile('[\s]+')
-        user_input = regex.sub(' ', user_input)
-        # remove any charachter which is not in the range: A-Z, a-z, ., whitespace
-        regex = re.compile('[^A-Z\.\s]')
-        user_input = regex.sub('', user_input)
-    else:
-        print("Your input is empty. Please try again. (press CTRL-C to quit)")
-        get_input()
+        if ( user_input ):
+            # convert input to uppercase
+            user_input = user_input.upper()
+            # replace all whitespace characters to a single whitespace character
+            regex = re.compile('[\s]+')
+            user_input = regex.sub(' ', user_input)
+            # remove any charachter which is not in the range: A-Z, a-z, ., whitespace
+            regex = re.compile('[^A-Z\.\s]')
+            user_input = regex.sub('', user_input)
 
-    # return the first 28 characters of the user input
-    return user_input[:28]
+            # return the first 28 characters of the user input
+            return user_input[:28]
+        else:
+            print("Your input is empty. Please try again. (press CTRL-C to quit)")
 
 
 # creates the new secret message from the images by
